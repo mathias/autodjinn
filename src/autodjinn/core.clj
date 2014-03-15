@@ -1,6 +1,11 @@
-(ns autodjinn.core)
+(ns autodjinn.core
+  (:require [clojure-mail.core :refer :all]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(def env
+  {:username ""
+   :password ""})
+
+(defn get-mail []
+  (auth! (:username env) (:password env))
+  (gen-store)
+  (first (inbox 1)))
