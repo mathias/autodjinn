@@ -1,11 +1,18 @@
 (ns autodjinn.core
-  (:require [clojure-mail.core :refer :all]))
+  (:require [clojure-mail.core :refer :all]
+            [nomad :refer [defconfig]]
+            [clojure.java.io :as io]))
 
-(def env
-  {:username ""
-   :password ""})
+(defconfig mail-config (io/resource "config/mail-config.edn"))
 
-(defn get-mail []
-  (auth! (:username env) (:password env))
-  (gen-store)
-  (first (inbox 1)))
+(def gmail-username (get (mail-config) :gmail-username))
+(def gmail-password (get (mail-config) :gmail-password))
+
+(defn auth-ok? []
+  (= com.sun.mail.imap.IMAPSSLStore
+     (class (gmail-store gmail-username gmail-password))))
+
+(defn download-inbox [limit]
+  (with-store (gmail-store gmail-username gmail-password)
+    (doseq [msg (inbox limit)]
+      (println (str "Saving: " (:subject msg))))))
