@@ -9,3 +9,4 @@ pom.xml.asc
 /.nrepl-port
 
 resources/config/mail-config.edn
+resources/*.properties

@@ -1,2 +1,3 @@
 {:gmail-username "you@gmail.com"
- :gmail-password ""}
+ :gmail-password ""
+ :db-uri "datomic:sql://autodjinn?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomic"}
