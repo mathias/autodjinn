@@ -9,4 +9,4 @@
                  [jarohen/nomad "0.6.3"]]
    :profiles {:dev
               {:datomic {:config "resources/sql-transactor-template.properties"
-                         :db-uri "datomic:sql://remembrance?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomic"}}})
+                         :db-uri "datomic:sql://autodjinn?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomicb"}}})
