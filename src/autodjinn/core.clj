@@ -17,7 +17,6 @@
 
 (def connection (d/connect db-uri))
 
-
 (defn db [] (d/db connection))
 
 (def schema-txn
@@ -116,13 +115,11 @@
   (let [contents (message/message-body msg)]
     (:body (first (filter #(is-content-type? %1 "text/html") contents)))))
 
-
 (defn remove-angle-brackets
   [string]
   (-> string
       (clojure.string/replace ">" "")
       (clojure.string/replace "<" "")))
-
 
 (def my-store (gen-store gmail-username gmail-password))
 
