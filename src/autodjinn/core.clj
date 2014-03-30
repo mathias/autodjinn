@@ -114,9 +114,9 @@
 
 (defn remove-angle-brackets
   [string]
-  (->  string
-       (clojure.string/replace ">" "")
-       (clojure.string/replace "<" "")))
+  (-> string
+      (clojure.string/replace ">" "")
+      (clojure.string/replace "<" "")))
 
 
 (def my-store (gen-store gmail-username gmail-password))
