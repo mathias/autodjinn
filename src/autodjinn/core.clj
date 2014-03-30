@@ -17,7 +17,7 @@
 
 (def connection (d/connect db-uri))
 
-(defn db [] (d/db connection))
+(defn new-db-val [] (d/db connection))
 
 (def schema-txn
   [{:db/id #db/id[:db.part/db]
