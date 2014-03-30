@@ -107,13 +107,14 @@
   (= (simple-content-type (:content-type body))
      requested-type))
 
+(defn find-body-of-type [bodies type]
+  (:body (first (filter #(is-content-type? %1 type) bodies))))
+
 (defn get-text-body [msg]
-  (let [contents (message/message-body msg)]
-    (:body (first (filter #(is-content-type? %1 "text/plain") contents)))))
+  (find-body-of-type (message/message-body msg) "text/plain"))
 
 (defn get-html-body [msg]
-  (let [contents (message/message-body msg)]
-    (:body (first (filter #(is-content-type? %1 "text/html") contents)))))
+  (find-body-of-type (message/message-body msg) "text/html"))
 
 (defn remove-angle-brackets
   [string]
