@@ -15,9 +15,9 @@
 ;; Always try to create the database
 (d/create-database db-uri)
 
-(def connection (d/connect db-uri))
+(def db-connection (d/connect db-uri))
 
-(defn new-db-val [] (d/db connection))
+(defn new-db-val [] (d/db db-connection))
 
 (def schema-txn
   [{:db/id #db/id[:db.part/db]
@@ -86,7 +86,7 @@
     :db.install/_attribute :db.part/db}])
 
 (defn update-schema []
-  (d/transact connection schema-txn))
+  (d/transact db-connection schema-txn))
 
 (defn get-sent-date
   "Returns an instant for the date sent"
@@ -140,14 +140,14 @@
 (defn ingest-inbox []
   (doseq [msg (inbox my-store)]
     (println (message/subject msg))
-    @(d/transact connection [{:db/id (d/tempid "db.part/user")
-                              :mail/uid (remove-angle-brackets (message/id msg))
-                              :mail/from (message/from msg)
-                              :mail/to (message/to msg)
-                              :mail/cc (cc-list msg)
-                              :mail/bcc (bcc-list msg)
-                              :mail/subject (message/subject msg)
-                              :mail/date-sent (get-sent-date msg)
-                              :mail/date-received (get-received-date msg)
-                              :mail/text-body (get-text-body msg)
-                              :mail/html-body (get-html-body msg)}])))
+    @(d/transact db-connection [{:db/id (d/tempid "db.part/user")
+                                 :mail/uid (remove-angle-brackets (message/id msg))
+                                 :mail/from (message/from msg)
+                                 :mail/to (message/to msg)
+                                 :mail/cc (cc-list msg)
+                                 :mail/bcc (bcc-list msg)
+                                 :mail/subject (message/subject msg)
+                                 :mail/date-sent (get-sent-date msg)
+                                 :mail/date-received (get-received-date msg)
+                                 :mail/text-body (get-text-body msg)
+                                 :mail/html-body (get-html-body msg)}])))
