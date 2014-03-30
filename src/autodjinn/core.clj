@@ -88,6 +88,16 @@
 (defn update-schema []
   (d/transact connection schema-txn))
 
+(defn get-sent-date
+  "Returns an instant for the date sent"
+  [msg]
+  (.getSentDate msg))
+
+(defn get-received-date
+  "Returns an instant for the date sent"
+  [msg]
+  (.getReceivedDate msg))
+
 (defn cc-list
   "Returns a sequence of CC-ed recipients"
   [m]
@@ -99,17 +109,6 @@
   [m]
   (map str
     (.getRecipients m javax.mail.Message$RecipientType/BCC)))
-
-
-(defn get-sent-date
-  "Returns an instant for the date sent"
-  [msg]
-  (.getSentDate msg))
-
-(defn get-received-date
-  "Returns an instant for the date sent"
-  [msg]
-  (.getReceivedDate msg))
 
 (defn simple-content-type [full-content-type]
   (-> full-content-type
