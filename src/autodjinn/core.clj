@@ -146,6 +146,7 @@
                               :mail/from (message/from msg)
                               :mail/to (message/to msg)
                               :mail/cc (cc-list msg)
+                              :mail/bcc (bcc-list msg)
                               :mail/subject (message/subject msg)
                               :mail/date-sent (get-sent-date msg)
                               :mail/date-received (get-received-date msg)
