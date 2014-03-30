@@ -100,15 +100,15 @@
 
 (defn cc-list
   "Returns a sequence of CC-ed recipients"
-  [m]
+  [msg]
   (map str
-    (.getRecipients m javax.mail.Message$RecipientType/CC)))
+    (.getRecipients msg javax.mail.Message$RecipientType/CC)))
 
 (defn bcc-list
   "Returns a sequence of BCC-ed recipients"
-  [m]
+  [msg]
   (map str
-    (.getRecipients m javax.mail.Message$RecipientType/BCC)))
+    (.getRecipients msg javax.mail.Message$RecipientType/BCC)))
 
 (defn simple-content-type [full-content-type]
   (-> full-content-type
