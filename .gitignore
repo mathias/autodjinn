@@ -8,5 +8,5 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 
-resources/config/mail-config.edn
+resources/config/*-config.edn
 resources/*.properties

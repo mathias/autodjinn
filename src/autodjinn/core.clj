@@ -5,7 +5,7 @@
             [clojure.java.io :as io]
             [datomic.api :as d]))
 
-(defconfig mail-config (io/resource "config/mail-config.edn"))
+(defconfig mail-config (io/resource "config/autodjinn-config.edn"))
 
 (def gmail-username (get (mail-config) :gmail-username))
 (def gmail-password (get (mail-config) :gmail-password))
