@@ -42,6 +42,13 @@
     :db/index true
     :db.install/_attribute :db.part/db}
    {:db/id #db/id[:db.part/db]
+    :db/ident :mail/bcc
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/many
+    :db/fulltext true
+    :db/index true
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
     :db/ident :mail/from
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
@@ -82,10 +89,17 @@
   (d/transact connection schema-txn))
 
 (defn cc-list
-  "Returns a sequence of CC-ed receivers"
+  "Returns a sequence of CC-ed recipients"
   [m]
   (map str
     (.getRecipients m javax.mail.Message$RecipientType/CC)))
+
+(defn bcc-list
+  "Returns a sequence of BCC-ed recipients"
+  [m]
+  (map str
+    (.getRecipients m javax.mail.Message$RecipientType/BCC)))
+
 
 (defn get-sent-date
   "Returns an instant for the date sent"
