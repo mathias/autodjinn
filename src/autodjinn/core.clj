@@ -98,10 +98,15 @@
   [msg]
   (.getReceivedDate msg))
 
-(defn is-content-type? [m requested-type]
-  (let [this-content-type (clojure.string/lower-case (first (clojure.string/split (:content-type m) #"[;]")))]
-    (= this-content-type
-       requested-type)))
+(defn simple-content-type [full-content-type]
+  (-> full-content-type
+      (clojure.string/split #"[;]")
+      (first)
+      (clojure.string/lower-case)))
+
+(defn is-content-type? [body requested-type]
+  (= (simple-content-type (:content-type body))
+     requested-type))
 
 (defn get-text-body [msg]
   (let [contents (message/message-body msg)]
