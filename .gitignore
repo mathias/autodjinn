@@ -10,3 +10,5 @@ pom.xml.asc
 
 resources/config/*-config.edn
 resources/*.properties
+
+.\#*
