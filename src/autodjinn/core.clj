@@ -85,3 +85,8 @@
 
 (defn update-schema []
   (d/transact db-connection schema-txn))
+
+(defn create-mail [attrs]
+  (d/transact db-connection
+              [(merge {:db/id (d/tempid "db.part/user")}
+                      attrs)]))

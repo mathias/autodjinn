@@ -3,8 +3,7 @@
             [clojure-mail.core :refer :all]
             [clojure-mail.message :as message :refer [read-message]]
             [nomad :refer [defconfig]]
-            [clojure.java.io :as io]
-            [datomic.api :as d]))
+            [clojure.java.io :as io]))
 
 (defconfig mail-config (io/resource "config/autodjinn-config.edn"))
 
@@ -60,20 +59,22 @@
 
 (def my-store (gen-store gmail-username gmail-password))
 
+(defn db-attrs-for [msg]
+  {:mail/uid (remove-angle-brackets (message/id msg))
+   :mail/from (message/from msg)
+   :mail/to (message/to msg)
+   :mail/cc (cc-list msg)
+   :mail/bcc (bcc-list msg)
+   :mail/subject (message/subject msg)
+   :mail/date-sent (get-sent-date msg)
+   :mail/date-received (get-received-date msg)
+   :mail/text-body (get-text-body msg)
+   :mail/html-body (get-html-body msg)})
+
 (defn ingest-inbox []
   (doseq [msg (inbox my-store)]
     (println (message/subject msg))
-    @(d/transact db-connection [{:db/id (d/tempid "db.part/user")
-                                 :mail/uid (remove-angle-brackets (message/id msg))
-                                 :mail/from (message/from msg)
-                                 :mail/to (message/to msg)
-                                 :mail/cc (cc-list msg)
-                                 :mail/bcc (bcc-list msg)
-                                 :mail/subject (message/subject msg)
-                                 :mail/date-sent (get-sent-date msg)
-                                 :mail/date-received (get-received-date msg)
-                                 :mail/text-body (get-text-body msg)
-                                 :mail/html-body (get-html-body msg)}])))
+    @(create-mail (db-attrs-for msg))))
 
 (defn -main
   "Perform a Gmail ingestion"
