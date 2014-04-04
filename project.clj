@@ -1,4 +1,4 @@
-(defproject autodjinn "0.1.0-SNAPSHOT"
+(defproject autodjinn "0.1.0"
   :description "An email analysis tool"
   :url "https://github.com/mathias/autodjinn"
   :license {:name "Eclipse Public License"
