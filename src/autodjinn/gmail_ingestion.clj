@@ -2,10 +2,9 @@
   (:require [autodjinn.core :refer :all]
             [clojure-mail.core :refer :all]
             [clojure-mail.message :as message :refer [read-message]]
-            [nomad :refer [defconfig]]
             [clojure.java.io :as io]))
 
-(defconfig mail-config (io/resource "config/autodjinn-config.edn"))
+(def mail-config autodjinn.core/config)
 
 (def gmail-username (get (mail-config) :gmail-username))
 (def gmail-password (get (mail-config) :gmail-password))

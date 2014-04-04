@@ -3,12 +3,9 @@
             [clojure.java.io :as io]
             [datomic.api :as d]))
 
-(defconfig mail-config (io/resource "config/autodjinn-config.edn"))
+(defconfig config (io/resource "config/autodjinn-config.edn"))
 
-(def gmail-username (get (mail-config) :gmail-username))
-(def gmail-password (get (mail-config) :gmail-password))
-
-(def db-uri (get (mail-config) :db-uri))
+(def db-uri (get (config) :db-uri))
 
 ;; Always try to create the database
 (d/create-database db-uri)
