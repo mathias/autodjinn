@@ -151,3 +151,14 @@
                                  :mail/date-received (get-received-date msg)
                                  :mail/text-body (get-text-body msg)
                                  :mail/html-body (get-html-body msg)}])))
+
+(defn -main
+  "Perform a Gmail ingestion"
+  []
+  (println "Gmail ingestion starting up")
+  (println "Attmpting to update the schema")
+  (update-schema)
+  (println "Beginning email ingestion")
+  (ingest-inbox)
+  (println "Done ingesting")
+  (System/exit 0))
