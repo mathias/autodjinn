@@ -12,3 +12,6 @@ resources/config/*-config.edn
 resources/*.properties
 
 .\#*
+
+# Mac craft
+.DS_Store
