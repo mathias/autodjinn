@@ -7,7 +7,7 @@
 
 ## Usage
 
-
+Follow along with development with the [Clojure Data Science](http://blog.mattgauger.com/blog/categories/clojure-data-science) posts on my blog.
 
 ## License
 
