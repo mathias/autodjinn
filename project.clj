@@ -7,6 +7,7 @@
                  [com.datomic/datomic-pro "0.9.4384"]
                  [clojure-mail "0.1.6"]
                  [jarohen/nomad "0.6.3"]]
-   :profiles {:dev
-              {:datomic {:config "resources/sql-transactor-template.properties"
-                         :db-uri "datomic:sql://autodjinn?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomicb"}}})
+  :plugins [[lein-datomic "0.2.0"]]
+  :profiles {:dev
+             {:datomic {:config "resources/sql-transactor-template.properties"
+                        :db-uri "datomic:sql://autodjinn?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomic"}}})
