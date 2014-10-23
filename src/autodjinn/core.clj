@@ -97,16 +97,16 @@
     :db/cardinality :db.cardinality/one
     :db.install/_attribute :db.part/db}
    {:db/id #db/id[:db.part/db]
-    :db/ident :sent-count/type
+    :db/ident :sent-count/address-type
     :db/valueType :db.type/ref
     :db/cardinality :db.cardinality/one
     :db.install/_attribute :db.part/db}
    {:db/id #db/id[:db.part/user]
-    :db/ident :sent-count.type/to}
+    :db/ident :sent-count.address-type/to}
    {:db/id #db/id[:db.part/user]
-    :db/ident :sent-count.type/cc}
+    :db/ident :sent-count.address-type/cc}
    {:db/id #db/id[:db.part/user]
-    :db/ident :sent-count.type/bcc}])
+    :db/ident :sent-count.address-type/bcc}])
 
 (defn update-schema []
   (d/transact db-connection schema-txn))
