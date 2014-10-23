@@ -93,60 +93,6 @@
   ([db datomic-eid-vec]
      (d/entity db (first datomic-eid-vec))))
 
-(comment
-
-  ;; get [message-uid to-address] tuples (multiple per message-uid)
-  (d/q '[:find ?muid ?to
-         :where
-         [?eid :mail/uid ?muid]
-         [?eid :mail/to ?to]]
-       (new-db-val))
-
-  ;; count to addresses:
-  (d/q '[:find ?to (count ?to)
-         :with ?eid
-         :where [?eid :mail/to ?to]]
-       (new-db-val))
-
-  ;; count bcc's:
-  (d/q '[:find ?cc (count ?cc)
-         :with ?eid
-         :where [?eid :mail/cc ?cc]]
-       (new-db-val))
-
-  ;; count bcc's:
-  (d/q '[:find ?bcc (count ?bcc)
-         :with ?eid
-         :where [?eid :mail/bcc ?bcc]]
-       (new-db-val))
-
-  ;;example aggregate query for counting
-  (d/q '[:find ?name (count ?name)
-         :with ?name
-         :where [?name]]
-       [["Jon"]
-        ["Bob"]
-        ["Jon"]
-        ["Chris"]])
-
-  (d/q '[:find ?to (count ?to)
-         :with ?msg
-         :where [?msg ?to]]
-       [["a" "matt@example.com"]
-        ["b" "matt@example.com"]
-        ["c" "example@example.com"]])
-
-  (let [db (new-db-val)]
-    (d/q '[:find ?from ?to (count ?fromto)
-           :with ?eid
-           :where [?eid ?fromto ?from ?to]]
-         (d/q '[:find ?eid ?combined ?from ?to
-                :where [?eid :mail/from ?from]
-                       [?eid :mail/to ?to]
-                       [(vector ?from ?to) ?combined]]
-              db))))
-
-
 (defn count-address-pairs-q
   ([attr] (count-address-pairs-q (new-db-val) attr))
   ([db attr]
