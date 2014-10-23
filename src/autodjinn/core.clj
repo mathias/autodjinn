@@ -78,7 +78,35 @@
     :db/ident :mail/html-body
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
-    :db.install/_attribute :db.part/db}])
+    :db.install/_attribute :db.part/db}
+
+   ;; sent-counts:
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/from
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/to
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/count
+    :db/valueType :db.type/long
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/type
+    :db/valueType :db.type/ref
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.type/to}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.type/cc}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.type/bcc}])
 
 (defn update-schema []
   (d/transact db-connection schema-txn))
